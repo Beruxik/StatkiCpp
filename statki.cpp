@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include<limits>
+#include<random>
 
 using namespace std;
 
@@ -183,10 +184,220 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], int ilumasztowiec
 			sprawdzacz = 1;
 	}
 
-	/*
-	while (pomocwpisanie != ilumasztowiec)
+	// Wpisanie statków i pól naoko³o nich
+	if (wktorastrone == 1) // W górê
 	{
-		if (wktorastrone == 1)
+		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
+			plansza[stoi(komorka.substr(1, 1)) - i][static_cast<int>(komorka[0]) - 97] = ilumasztowiec;
+
+		for (int i = -1; i <= 1; i++) // Wpisanie pól naoko³o statku
+		{
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa œciana
+				continue;
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa œciana
+				continue;
+			else
+			{
+				for (int j = -1; j <= ilumasztowiec; j++)
+				{
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna œciana
+						continue;
+					else if (stoi(komorka.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // Górna œciana
+						continue;
+					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
+						continue;
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
+					{
+						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] == 0)
+							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] = 5;
+					}
+				}
+			}
+		}
+	}
+
+	else if (wktorastrone == 2) // W prawo
+	{
+		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
+			plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97 + i] = ilumasztowiec;
+
+		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naoko³o statku
+		{
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa œciana
+				continue;
+			else if (static_cast<int>(komorka[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa œciana
+				continue;
+			else
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna œciana
+						continue;
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // Górna œciana
+						continue;
+					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
+						continue;
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
+					{
+						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] == 0)
+							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] = 5;
+					}
+				}
+			}
+		}
+	}
+
+	else if (wktorastrone == 3) // W dó³
+	{
+		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
+			plansza[stoi(komorka.substr(1, 1)) + i][static_cast<int>(komorka[0]) - 97] = ilumasztowiec;
+
+		for (int i = -1; i <= 1; i++) // Wpisanie pól naoko³o statku
+		{
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa œciana
+				continue;
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa œciana
+				continue;
+			else
+			{
+				for (int j = -1; j <= ilumasztowiec; j++)
+				{
+					if (stoi(komorka.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna œciana
+						continue;
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == -1) // Górna œciana
+						continue;
+					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
+						continue;
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
+					{
+						if (plansza[stoi(komorka.substr(1, 1)) + j][static_cast<int>(komorka[0]) - 97 + i] == 0)
+							plansza[stoi(komorka.substr(1, 1)) + j][static_cast<int>(komorka[0]) - 97 + i] = 5;
+					}
+				}
+			}
+		}
+	}
+
+	else if (wktorastrone == 4) // W lewo
+	{
+		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
+			plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97 - i] = ilumasztowiec;
+
+		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naoko³o statku
+		{
+			if (static_cast<int>(komorka[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa œciana
+				continue;
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == -1) // Prawa œciana
+				continue;
+			else
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna œciana
+						continue;
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // Górna œciana
+						continue;
+					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
+						continue;
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
+					{
+						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 - i] == 0)
+							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 - i] = 5;
+					}
+				}
+			}
+		}
+	}
+}
+
+void ustaw_statki_losowo(int plansza[10][10], int ilumasztowiec)
+{
+	int wktorastrone = 0;
+	int pomocwpisanie = 0;
+	string komorka, pomoc;
+	bool sprawdzacz = 0, sprawdzaczsciana = 0;
+
+	// Generowanie losowej komórki i kierunku 
+	random_device device;
+	mt19937 generator(device());
+	uniform_int_distribution <int> wspolrzedna(0, 9);
+	uniform_int_distribution <int> kierunek(1, 4);
+
+	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana komórka jest mo¿liwa
+	{
+		sprawdzacz = 0;
+		sprawdzaczsciana = 0;
+		pomocwpisanie = 0;
+
+		// Losowanie komórki i kierunku
+		pomoc = (1, 'a' + wspolrzedna(generator));
+		komorka = pomoc + to_string(wspolrzedna(generator));
+		wktorastrone = kierunek(generator);
+
+		// Sprawdzanie, czy w dan¹ komórkê mo¿na wpisaæ statek pod wzglêdem œcian
+		if (wktorastrone == 1) // Dla góry
+		{
+			for (int i = ilumasztowiec - 1; i < 10; i++)
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					string a(1, 'a' + j);
+					if (komorka == a + to_string(i))
+					{
+						sprawdzaczsciana = 1;
+						break;
+					}
+				}
+			}
+		}
+		else if (wktorastrone == 2) // Dla prawa
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 0; j < 11 - ilumasztowiec; j++)
+				{
+					string a(1, 'a' + j);
+					if (komorka == a + to_string(i))
+					{
+						sprawdzaczsciana = 1;
+						break;
+					}
+				}
+			}
+		}
+		else if (wktorastrone == 3) // Dla do³u
+		{
+			for (int i = 0; i < 11 - ilumasztowiec; i++)
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					string a(1, 'a' + j);
+					if (komorka == a + to_string(i))
+					{
+						sprawdzaczsciana = 1;
+						break;
+					}
+				}
+			}
+		}
+		else if (wktorastrone == 4) // Dla lewa
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = ilumasztowiec - 1; j < 10; j++)
+				{
+					string a(1, 'a' + j);
+					if (komorka == a + to_string(i))
+					{
+						sprawdzaczsciana = 1;
+						break;
+					}
+				}
+			}
+		}
+
+		// Sprawdzanie, czy w dan¹ komórkê mo¿na wpisaæ statek pod wzglêdem innych statków
+		if (wktorastrone == 1) // Dla góry
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -194,7 +405,7 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], int ilumasztowiec
 					pomocwpisanie++;
 			}
 		}
-		else if (wktorastrone == 2)
+		else if (wktorastrone == 2) // Dla prawa
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -202,7 +413,7 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], int ilumasztowiec
 					pomocwpisanie++;
 			}
 		}
-		else if (wktorastrone == 3)
+		else if (wktorastrone == 3) // Dla do³u
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -210,7 +421,7 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], int ilumasztowiec
 					pomocwpisanie++;
 			}
 		}
-		else if (wktorastrone == 4)
+		else if (wktorastrone == 4) // Dla lewa
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -219,20 +430,11 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], int ilumasztowiec
 			}
 		}
 
-		if (pomocwpisanie != ilumasztowiec)
-		{
-			cout << "Nie mo¿na wpisaæ statku w to miejsce, gdy¿ to pole jest ju¿ zajête! Spróbuj ponownie: ";
-			cin >> komorka;
-			pomocwpisanie = 0;
-
-			// Zmiana zmiennnej komorka z np. a1 na a0
-			if (komorka.length() == 2)
-				komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
-			else
-				komorka = komorka[0] + to_string(stoi(komorka.substr(1, 2)) - 1);
-		}
+		if (sprawdzaczsciana == 1 && pomocwpisanie == ilumasztowiec)
+			sprawdzacz = 1;
+		else
+			sprawdzacz = 0;	
 	}
-	*/
 
 	// Wpisanie statków i pól naoko³o nich
 	if (wktorastrone == 1) // W górê
@@ -465,6 +667,12 @@ int main()
 	wypisz_plansze2(gracz1statki);
 	ustaw_statki(gracz1statki, komorki, 1);
 	wypisz_plansze2(gracz1statki);
+
+	for (int i = 1; i <= 4; i++)
+		for (int j = 4; j >= i; j--)
+			ustaw_statki_losowo(gracz2statki, i);
+
+	wypisz_plansze2(gracz2statki);
 
 	system("pause");
 }
