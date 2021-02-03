@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void ustaw_statki(int plansza[10][10], string komorki[10][10], vector<vector<string>> &komorkistatki, int ilumasztowiec)
+void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<string>>& komorkistatki, int ilumasztowiec)
 {
 	double wktorastrone = 0;
 	int pomoctabela = 0, pomocwpisanie = 0;
@@ -52,6 +52,9 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], vector<vector<str
 		sprawdzaczsciana = 0;
 		pomocwpisanie = 0;
 
+		if (komorka.length() < 2 || komorka.length() > 3)
+			komorka = "k5";
+
 		// Sprawdzanie, czy u¾ytkownik wpisaˆ mo¾liw¥ kom¢rk©
 		for (int i = 0; i < 10; i++)
 		{
@@ -65,11 +68,17 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], vector<vector<str
 			}
 		}
 
-		// Zmiana zmiennnej komorka z np. a1 na a0
-		if (komorka.length() == 2)
+		// Zmiana zmiennnej komorka z np. a1 na a0 lub z np. 1a na a0
+		if (komorka.length() == 2 && komorka[0] >= 'a' && komorka[0] <= 'j')
 			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
-		else
+		else if (komorka.length() == 3 && komorka[0] >= 'a' && komorka[0] <= 'j')
 			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 2)) - 1);
+		else if (komorka.length() == 2 && komorka[0] >= '1' && komorka[0] <= '9')
+			komorka = komorka[1] + to_string(stoi(komorka.substr(0, 1)) - 1);
+		else if (komorka.length() == 3 && komorka[0] == '1' && komorka[1] == '0')
+			komorka = komorka[2] + to_string(stoi(komorka.substr(0, 2)) - 1);
+		else
+			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
 
 		// Sprawdzanie, czy w dan¥ kom¢rk© mo¾na wpisa† statek pod wzgl©dem ˜cian
 		if (wktorastrone == 1) // Dla g¢ry
@@ -350,7 +359,7 @@ void ustaw_statki(int plansza[10][10], string komorki[10][10], vector<vector<str
 	}
 }
 
-void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>> &komorkistatki, int ilumasztowiec)
+void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkistatki, int ilumasztowiec)
 {
 	int wktorastrone = 0;
 	int pomocwpisanie = 0;
@@ -476,7 +485,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>> &komorkista
 		if (sprawdzaczsciana == 1 && pomocwpisanie == ilumasztowiec)
 			sprawdzacz = 1;
 		else
-			sprawdzacz = 0;	
+			sprawdzacz = 0;
 	}
 
 	vector<string> pomockomorki;
@@ -648,12 +657,12 @@ void wypisz_plansze(int plansza[10][10], int jak)
 			{
 				if (j == 10)
 					continue;
-				if(j == 0)
+				if (j == 0)
 					cout << "   " << static_cast<char>('a' + j);
 				else
 					cout << " " << static_cast<char>('a' + j);
 			}
-				
+
 			else
 			{
 				if (j == 0) // Wypisanie indeks¢w na prawej ˜cianie (1, 2, 3, ...)
@@ -724,7 +733,7 @@ void wypisz_plansze_gra(int plansza[10][10])
 	}
 }
 
-void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomorki, vector<vector<string>> &komorkistatki, int gracz)
+void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomorki, vector<vector<string>>& komorkistatki, int gracz)
 {
 	string komorka;
 	bool sprawdzacz = 0, sprawdzaczkomorka = 0, sprawdzaczuzycie = 1, sprawdzacztrafienie = 0;
@@ -739,6 +748,9 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 		sprawdzaczkomorka = 0;
 		sprawdzaczuzycie = 1;
 
+		if (komorka.length() < 2 || komorka.length() > 3)
+			komorka = "k5";
+
 		// Sprawdzanie, czy u¾ytkownik wpisaˆ mo¾liw¥ kom¢rk©
 		for (int i = 0; i < 10; i++)
 		{
@@ -752,11 +764,17 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 			}
 		}
 
-		// Zmiana zmiennnej komorka z np. a1 na a0
-		if (komorka.length() == 2)
+		// Zmiana zmiennnej komorka z np. a1 na a0 lub z np. 1a na a0
+		if (komorka.length() == 2 && komorka[0] >= 'a' && komorka[0] <= 'j')
 			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
-		else
+		else if (komorka.length() == 3 && komorka[0] >= 'a' && komorka[0] <= 'j')
 			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 2)) - 1);
+		else if (komorka.length() == 2 && komorka[0] >= '1' && komorka[0] <= '9')
+			komorka = komorka[1] + to_string(stoi(komorka.substr(0, 1)) - 1);
+		else if (komorka.length() == 3 && komorka[0] == '1' && komorka[1] == '0')
+			komorka = komorka[2] + to_string(stoi(komorka.substr(0, 2)) - 1);
+		else
+			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
 
 		// Sprawdzanie, czy u¾ytkownik podaˆ kom¢rk©, kt¢rej nie wykorzystaˆ 
 		for (int i = 0; unsigned(i) < uzytekomorki.size(); i++)
@@ -949,7 +967,7 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 			}
 
 			komorkistatki.erase(komorkistatki.begin() + pomoci); // Usuni©cie kom¢rki z zatopionym statkiem
-			
+
 			if (komorkistatki.size() == 0) // Skoäczenie dziaˆania funkcji po zwyci©stwie
 				return;
 		}
@@ -969,7 +987,7 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 	}
 }
 
-void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& komorkistatki, int gracz)
+void menu(int plansza[10][10], string komorki[20][20], vector<vector<string>>& komorkistatki, int gracz)
 {
 	system("cls");
 	cout << "STATKI!" << endl;
@@ -978,22 +996,39 @@ void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& k
 	cout << "1. Graj" << endl;
 	cout << "2. Instrukcja" << endl;
 	cout << "3. Wyjd«" << endl;
-	
-	int wybor, wyborgra;
+
+	string wybor, wyborgra;
 	cout << "Wybierz opcj©: ";
 	cin >> wybor;
 
-	switch (wybor)
+	while (wybor[0] < '1' || wybor[0] > '3') // Sprawdzanie, czy u¿ytkownik poda³ odpowiedni¹ opcjê
+	{
+		cout << "Nie podaˆe˜ wˆa˜ciwej opcji! Spr¢buj ponownie: ";
+		cin.clear();
+		cin.ignore(1000, '\n');
+		cin >> wybor;
+	}
+
+	switch (static_cast<int>(wybor[0] - '0'))
 	{
 		case 1:
 		{
 			system("cls");
-			cout << "Graczu nr " << gracz <<". Wybierz opcj©." << endl;
+			cout << "Graczu nr " << gracz << ". Wybierz opcj©." << endl;
 			cout << "1. Ustaw statki sam" << endl;
 			cout << "2. Ustaw statki losowo" << endl;
 			cout << "Wybierz opcj©: ";
 			cin >> wyborgra;
-			switch (wyborgra)
+
+			while (wyborgra[0] < '1' || wyborgra[0] > '3') // Sprawdzanie, czy u¿ytkownik poda³ odpowiedni¹ opcjê
+			{
+				cout << "Nie podaˆe˜ wˆa˜ciwej opcji! Spr¢buj ponownie: ";
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cin >> wyborgra;
+			}
+
+			switch (static_cast<int>(wyborgra[0] - '0'))
 			{
 				case 1:
 				{
@@ -1018,7 +1053,7 @@ void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& k
 					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
 					break;
-				}	
+				}
 				case 2:
 				{
 					for (int i = 1; i <= 4; i++)
@@ -1027,12 +1062,6 @@ void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& k
 					wypisz_plansze(plansza, 0);
 					cout << "Twoja losowo wygenerowana plansza." << endl;
 					system("pause");
-					break;
-				}
-				default:
-				{
-					cout << "Nie wybraˆe˜ odpowiedniej opcji! Spr¢buj ponownie: ";
-					cin >> wyborgra;
 					break;
 				}
 			}
@@ -1054,12 +1083,6 @@ void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& k
 		}
 		case 3:
 			exit(1);
-		default:
-		{
-			cout << "Nie wybraˆe˜ odpowiedniej opcji! Spr¢buj ponownie: ";
-			cin >> wybor;
-			break;
-		}
 	}
 }
 
@@ -1070,7 +1093,7 @@ int main()
 	vector<vector<string>> komorkistatki2;
 	vector<string> uzytekomorki1;
 	vector<string> uzytekomorki2;
-	string komorki[10][10];
+	string komorki[20][20];
 	int wygrana = 1;
 
 	// Wypeˆnienie tabel zerami
@@ -1092,6 +1115,7 @@ int main()
 		{
 			string a(1, 'a' + j);
 			komorki[i - 1][j] = a + to_string(i);
+			komorki[i - 1 + 10][j + 10] = to_string(i) + a;
 		}
 	}
 
