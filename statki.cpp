@@ -636,22 +636,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>> &komorkista
 	}
 }
 
-void wypisz_plansze(int plansza[10][10])
-{
-	system("cls"); // Wyczyszczenie konsoli
-
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			cout.width(1);
-			cout << plansza[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
-
-void wypisz_plansze2(int plansza[10][10])
+void wypisz_plansze(int plansza[10][10], int jak)
 {
 	system("cls"); // Wyczyszczenie konsoli
 
@@ -682,7 +667,9 @@ void wypisz_plansze2(int plansza[10][10])
 				{
 					if (plansza[i - 1][j - 1] == 0) // Wypisanie elementów pustych
 						cout << ". ";
-					else if (plansza[i - 1][j - 1] == 5) // Wypisanie "obwódki" statku
+					else if (plansza[i - 1][j - 1] == 5 && jak == 1) // Wypisanie "obwódki" statku
+						cout << "x ";
+					else if (plansza[i - 1][j - 1] == 5 && jak == 0)
 						cout << ". ";
 					else // Wypisanie statku
 						cout << plansza[i - 1][j - 1] << " ";
@@ -737,7 +724,7 @@ void wypisz_plansze_gra(int plansza[10][10])
 	}
 }
 
-void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomorki, vector<vector<string>> &komorkistatki)
+void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomorki, vector<vector<string>> &komorkistatki, int gracz)
 {
 	string komorka;
 	bool sprawdzacz = 0, sprawdzaczkomorka = 0, sprawdzaczuzycie = 1, sprawdzacztrafienie = 0;
@@ -824,13 +811,15 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 	if (sprawdzacztrafienie == 1) // Jeœli trafi³
 	{
 		komorkistatki[pomoci].erase(komorkistatki[pomoci].begin() + pomocj);
+		plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97] = 1;
+		wypisz_plansze_gra(plansza);
 		if (komorkistatki[pomoci].size() == 2)
 		{
 			cout << "Trafiony zatopiony! :D" << endl;
+
 			ilumasztowiec = stoi(komorkistatki[pomoci][0].substr(0, 1));
 			wktorastrone = stoi(komorkistatki[pomoci][0].substr(1));
 			komorkapomoc = komorkistatki[pomoci][1];
-			cout << ilumasztowiec << " " << wktorastrone << endl;
 
 			// Wypisanie pól naoko³o statku
 			if (wktorastrone == 1) // W górê
@@ -857,14 +846,12 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 								{
 									plansza[stoi(komorkapomoc.substr(1, 1)) - j][static_cast<int>(komorkapomoc[0]) - 97 + i] = 5;
 									string a(1, komorkapomoc[0] + i);
-									cout << "Komorka: " << a << stoi(komorkapomoc.substr(1, 1)) - j << " dla " << i << " i " << j << endl;
 									uzytekomorki.push_back(a + to_string(stoi(komorkapomoc.substr(1, 1)) - j));
 								}
 							}
 						}
 					}
 				}
-				system("pause");
 			}
 			else if (wktorastrone == 2) // W prawo
 			{
@@ -962,39 +949,24 @@ void gra(int plansza[10][10], string komorki[10][10], vector<string> &uzytekomor
 			}
 
 			komorkistatki.erase(komorkistatki.begin() + pomoci); // Usuniêcie komórki z zatopionym statkiem
-			for (int i = 0; unsigned(i) < komorkistatki.size(); i++) // Wypisywanie komórek z nietrafionymi statkami
-			{
-				for (int j = 0; unsigned(j) < komorkistatki[i].size(); j++)
-				{
-					cout << komorkistatki[i][j] << " ";
-				}
-				cout << endl;
-			}
-
-			if (komorkistatki.size() == 0)
+			
+			if (komorkistatki.size() == 0) // Skoñczenie dzia³ania funkcji po zwyciêstwie
 				return;
 		}
 		else
-		{
 			cout << "Trafiony! :)" << endl;
-			for (int i = 0; unsigned(i) < komorkistatki.size(); i++)
-			{
-				for (int j = 0; unsigned(j) < komorkistatki[i].size(); j++)
-					cout << komorkistatki[i][j] << " ";
-				cout << endl;
-			}
-		}
-		plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97] = 1;
 		system("pause");
 		wypisz_plansze_gra(plansza);
-		gra(plansza, komorki, uzytekomorki, komorkistatki);
+		cout << "Kolej gracza nr " << gracz << endl;
+		gra(plansza, komorki, uzytekomorki, komorkistatki, gracz);
 	}
 	else // Jeœli nie trafi³
 	{
-		cout << "Tym razem nie trafi³eœ... :/" << endl;
 		plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97] = 2;
+		wypisz_plansze_gra(plansza);
+		cout << "Tym razem nie trafi³eœ... :/" << endl;
 		system("pause");
-	}	
+	}
 }
 
 void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& komorkistatki, int gracz)
@@ -1025,25 +997,25 @@ void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& k
 			{
 				case 1:
 				{
-					/*wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 4);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 3);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 3);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 2);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 2);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 2);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
-					wypisz_plansze2(plansza);*/
+					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
 					break;
 				}	
@@ -1052,7 +1024,7 @@ void menu(int plansza[10][10], string komorki[10][10], vector<vector<string>>& k
 					for (int i = 1; i <= 4; i++)
 						for (int j = 4; j >= i; j--)
 							ustaw_statki_losowo(plansza, komorkistatki, i);
-					wypisz_plansze2(plansza);
+					wypisz_plansze(plansza, 0);
 					cout << "Twoja losowo wygenerowana plansza." << endl;
 					system("pause");
 					break;
@@ -1123,72 +1095,15 @@ int main()
 		}
 	}
 
+	// Gra
 	menu(gracz1statki, komorki, komorkistatki1, 1);
 	menu(gracz2statki, komorki, komorkistatki2, 2);
-
-	/*string komorka;
-	komorka = "d7";
-
-	string a(1, komorka[0] + 1);
-	komorkistatki1.push_back(a + komorka.substr(1, 1));
-	cout << komorkistatki1[0] << komorkistatki1.size() << endl;
-	system("pause");*/
-
-	/*wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 4);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 3);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 3);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 2);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 2);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 2);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 1);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 1);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 1);
-	wypisz_plansze2(gracz1statki);
-	ustaw_statki(gracz1statki, komorki, komorkistatki1, 1);
-	wypisz_plansze2(gracz1statki);*/
-
-	/*for (int i = 1; i <= 4; i++)
-		for (int j = 4; j >= i; j--)
-			ustaw_statki_losowo(gracz2statki, komorkistatki2, i);
-	for (int i = 1; i <= 4; i++)
-		for (int j = 4; j >= i; j--)
-			ustaw_statki_losowo(gracz1statki, komorkistatki1, i);
-
-	wypisz_plansze2(gracz1statki);
-
-	for (int i = 0; unsigned(i) < komorkistatki2.size(); i++)
-	{
-		for (int j = 0; unsigned(j) < komorkistatki2[i].size(); j++)
-			cout << komorkistatki2[i][j] << " ";
-		cout << endl;
-	}
-	cout << komorkistatki2.size();
-	system("pause");
-
-	wypisz_plansze2(gracz2statki);*/
-
-	/*for (int i = 0; i < komorkistatki2.size(); i++)
-	{
-		for (int j = 0; j < komorkistatki2[i].size(); j++)
-			cout << komorkistatki2[i][j] << " ";
-		cout << endl;
-	}
-	system("pause");*/
 
 	while (komorkistatki1.size() != 0 || komorkistatki2.size() != 0)
 	{
 		wypisz_plansze_gra(gracz1statkigra);
 		cout << "Kolej gracza 1" << endl;
-		gra(gracz1statkigra, komorki, uzytekomorki1, komorkistatki2);
+		gra(gracz1statkigra, komorki, uzytekomorki1, komorkistatki2, 1);
 		if (komorkistatki2.size() == 0)
 		{
 			wygrana = 1;
@@ -1196,7 +1111,7 @@ int main()
 		}
 		wypisz_plansze_gra(gracz2statkigra);
 		cout << "Kolej gracza 2" << endl;
-		gra(gracz2statkigra, komorki, uzytekomorki2, komorkistatki1);
+		gra(gracz2statkigra, komorki, uzytekomorki2, komorkistatki1, 2);
 		if (komorkistatki1.size() == 0)
 		{
 			wygrana = 2;
