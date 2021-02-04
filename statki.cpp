@@ -56,9 +56,9 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 			komorka = "k5";
 
 		// Sprawdzanie, czy u¾ytkownik wpisaˆ mo¾liw¥ kom¢rk©
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			for (int j = 0; j < 10; j++)
+			for (int j = 0; j < 20; j++)
 			{
 				if (komorka.compare(komorki[i][j]) == 0)
 				{
@@ -752,9 +752,9 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 			komorka = "k5";
 
 		// Sprawdzanie, czy u¾ytkownik wpisaˆ mo¾liw¥ kom¢rk©
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			for (int j = 0; j < 10; j++)
+			for (int j = 0; j < 20; j++)
 			{
 				if (komorka.compare(komorki[i][j]) == 0)
 				{
@@ -1052,6 +1052,9 @@ void menu(int plansza[10][10], string komorki[20][20], vector<vector<string>>& k
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
 					wypisz_plansze(plansza, 1);
 					ustaw_statki(plansza, komorki, komorkistatki, 1);
+					wypisz_plansze(plansza, 1);
+					cout << "Oto Twoja plansza graczu " << gracz << "." << endl;
+					system("pause");
 					break;
 				}
 				case 2:
