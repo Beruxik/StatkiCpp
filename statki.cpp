@@ -22,7 +22,7 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 		cin >> wktorastrone;
 	}
 
-	while ((wktorastrone != 1 && wktorastrone != 2 && wktorastrone != 3 && wktorastrone != 4)) // Sprawdzanie, czy u¾ytkownik podaˆ odpowiedni kierunek
+	while ((wktorastrone != 1 && wktorastrone != 2 && wktorastrone != 3 && wktorastrone != 4)) // Sprawdzanie, czy u¿ytkownik poda³ˆ odpowiedni kierunek
 	{
 		if (!cin)
 		{
@@ -39,11 +39,11 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 		cin >> wktorastrone;
 	}
 
-	// Ustawianie pierwszej kom¢rki masztowca
+	// Ustawianie pierwszej komórki masztowca
 	cout << "Podaj kom¢rk©, w kt¢rej chcesz umie˜ci† pierwsz¥ cz©˜† " << ilumasztowiec << "masztowca (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
 	cin >> komorka;
 
-	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana kom¢rka jest mo¾liwa
+	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana komórka jest mo¿liwa
 	{
 		sprawdzacz = 0;
 		sprawdzaczkomorka = 0;
@@ -53,7 +53,7 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 		if (komorka.length() < 2 || komorka.length() > 3)
 			komorka = "k5";
 
-		// Sprawdzanie, czy u¾ytkownik wpisaˆ mo¾liw¥ kom¢rk©
+		// Sprawdzanie, czy u¿ytkownik wpisa³ˆ mo¿liw¹ komórkê
 		for (int i = 0; i < 20; i++)
 		{
 			for (int j = 0; j < 20; j++)
@@ -78,8 +78,8 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 		else
 			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
 
-		// Sprawdzanie, czy w dan¥ kom¢rk© mo¾na wpisa† statek pod wzgl©dem ˜cian
-		if (wktorastrone == 1) // Dla g¢ry
+		// Sprawdzanie, czy w dan¹ komórkê mo¿na wpisaæ statek pod wzglêdem œ˜cian
+		if (wktorastrone == 1) // Dla góry
 		{
 			for (int i = ilumasztowiec - 1; i < 10; i++)
 			{
@@ -109,7 +109,7 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 				}
 			}
 		}
-		else if (wktorastrone == 3) // Dla doˆu
+		else if (wktorastrone == 3) // Dla doˆ³u
 		{
 			for (int i = 0; i < 11 - ilumasztowiec; i++)
 			{
@@ -140,8 +140,8 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 			}
 		}
 
-		// Sprawdzanie, czy w dan¥ kom¢rk© mo¾na wpisa† statek pod wzgl©dem innych statk¢w
-		if (wktorastrone == 1) // Dla g¢ry
+		// Sprawdzanie, czy w dan¹ komórkê mo¿na wpisaæ statek pod wzglêdem innych statków
+		if (wktorastrone == 1) // Dla góry
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -157,7 +157,7 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 					pomocwpisanie++;
 			}
 		}
-		else if (wktorastrone == 3) // Dla doˆu
+		else if (wktorastrone == 3) // Dla doˆ³u
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -174,7 +174,7 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 			}
 		}
 
-		// Wypisanie bˆ©d¢w
+		// Wypisanie bˆ³êdów
 		if (sprawdzaczkomorka == 0)
 		{
 			cout << "Nie mo¾na wpisa† statku w to miejsce, gdy¾ podaˆe˜ niewˆa˜ciw¥ kom¢rk©! Spr¢buj ponownie: ";
@@ -201,36 +201,36 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 	}
 
 	vector<string> pomoc;
-	// Wpisanie statk¢w i p¢l naokoˆo nich
-	if (wktorastrone == 1) // W g¢r©
+	// Wpisanie statków i pól naoko³ˆo nich
+	if (wktorastrone == 1) // W górê
 	{
 		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
 		{
 			plansza[stoi(komorka.substr(1, 1)) - i][static_cast<int>(komorka[0]) - 97] = ilumasztowiec;
 			pomoc.push_back(komorka[0] + to_string(stoi(komorka.substr(1, 1)) - i));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o dˆ³ugoœci masztowca, w któr¹ stronê by³ wpisany oraz o tym, która komórka byˆa wpisana jako pierwsza
 		pomoc.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomoc.push_back(komorka);
 		komorkistatki.push_back(pomoc);
 
-		for (int i = -1; i <= 1; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= 1; i++) // Wpisanie pól naoko³o statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜œciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa œ˜ciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= ilumasztowiec; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // Górna ˜œciana
 						continue;
-					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] = 5;
@@ -248,28 +248,28 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 			string a(1, komorka[0] + i);
 			pomoc.push_back(a + komorka.substr(1, 1));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o d³ˆugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka byˆ³a wpisana jako pierwsza
 		pomoc.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomoc.push_back(komorka);
 		komorkistatki.push_back(pomoc);
 
-		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naokoˆ³o statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa œ˜ciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa ˜œciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= 1; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // Górna œ˜ciana
 						continue;
-					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] = 5;
@@ -279,35 +279,35 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 		}
 	}
 
-	else if (wktorastrone == 3) // W d¢ˆ
+	else if (wktorastrone == 3) // W dó³
 	{
 		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
 		{
 			plansza[stoi(komorka.substr(1, 1)) + i][static_cast<int>(komorka[0]) - 97] = ilumasztowiec;
 			pomoc.push_back(komorka[0] + to_string(stoi(komorka.substr(1, 1)) + i));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o d³ˆugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka by³ˆa wpisana jako pierwsza
 		pomoc.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomoc.push_back(komorka);
 		komorkistatki.push_back(pomoc);
 
-		for (int i = -1; i <= 1; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= 1; i++) // Wpisanie pól naokoˆ³o statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜œciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa œ˜ciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= ilumasztowiec; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna ˜œciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == 0 && j == -1) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == -1) // Górna ˜œciana
 						continue;
-					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) + j][static_cast<int>(komorka[0]) - 97 + i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) + j][static_cast<int>(komorka[0]) - 97 + i] = 5;
@@ -325,28 +325,28 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 			string a(1, komorka[0] - i);
 			pomoc.push_back(a + komorka.substr(1, 1));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o d³ˆugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka by³ˆa wpisana jako pierwsza
 		pomoc.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomoc.push_back(komorka);
 		komorkistatki.push_back(pomoc);
 
-		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naoko³ˆo statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa ˜œciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == -1) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == -1) // Prawa ˜œciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= 1; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // Górna œ˜ciana
 						continue;
-					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 - i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 - i] = 5;
@@ -364,19 +364,19 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 	string komorka, pomoc;
 	bool sprawdzacz = 0, sprawdzaczsciana = 0;
 
-	// Generowanie losowej kom¢rki i kierunku 
+	// Generowanie losowej komórki i kierunku 
 	random_device device;
 	mt19937 generator(device());
 	uniform_int_distribution <int> wspolrzedna(0, 9);
 	uniform_int_distribution <int> kierunek(1, 4);
 
-	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana kom¢rka jest mo¾liwa
+	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana komórka jest mo¿liwa
 	{
 		sprawdzacz = 0;
 		sprawdzaczsciana = 0;
 		pomocwpisanie = 0;
 
-		// Losowanie kom¢rki i kierunku
+		// Losowanie komórki i kierunku
 		pomoc = (1, 'a' + wspolrzedna(generator));
 		komorka = pomoc + to_string(wspolrzedna(generator));
 		if (ilumasztowiec == 1)
@@ -384,7 +384,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 		else
 			wktorastrone = kierunek(generator);
 
-		// Sprawdzanie, czy w dan¥ kom¢rk© mo¾na wpisa† statek pod wzgl©dem ˜cian
+		// Sprawdzanie, czy w dan¹ komórkê mo¿na wpisaæ statek pod wzglêdem œ˜cian
 		if (wktorastrone == 1) // Dla g¢ry
 		{
 			for (int i = ilumasztowiec - 1; i < 10; i++)
@@ -415,7 +415,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 				}
 			}
 		}
-		else if (wktorastrone == 3) // Dla doˆu
+		else if (wktorastrone == 3) // Dla doˆ³u
 		{
 			for (int i = 0; i < 11 - ilumasztowiec; i++)
 			{
@@ -446,8 +446,8 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 			}
 		}
 
-		// Sprawdzanie, czy w dan¥ kom¢rk© mo¾na wpisa† statek pod wzgl©dem innych statk¢w
-		if (wktorastrone == 1) // Dla g¢ry
+		// Sprawdzanie, czy w dan¹ komórkê mo¿na wpisaæ statek pod wzglêdem œ˜cian
+		if (wktorastrone == 1) // Dla góry
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -463,7 +463,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 					pomocwpisanie++;
 			}
 		}
-		else if (wktorastrone == 3) // Dla doˆu
+		else if (wktorastrone == 3) // Dla doˆ³u
 		{
 			for (int i = 0; i < ilumasztowiec; i++)
 			{
@@ -487,7 +487,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 	}
 
 	vector<string> pomockomorki;
-	// Wpisanie statk¢w i p¢l naokoˆo nich
+	// Wpisanie statków i pól naoko³ˆo nich
 	if (wktorastrone == 1) // W g¢r©
 	{
 		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
@@ -495,28 +495,28 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 			plansza[stoi(komorka.substr(1, 1)) - i][static_cast<int>(komorka[0]) - 97] = ilumasztowiec;
 			pomockomorki.push_back(komorka[0] + to_string(stoi(komorka.substr(1, 1)) - i));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o dˆ³ugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka by³ˆa wpisana jako pierwsza
 		pomockomorki.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomockomorki.push_back(komorka);
 		komorkistatki.push_back(pomockomorki);
 
-		for (int i = -1; i <= 1; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= 1; i++) // Wpisanie pól naokoˆ³o statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜œciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa œ˜ciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= ilumasztowiec; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // Górna ˜œciana
 						continue;
-					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] = 5;
@@ -534,28 +534,28 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 			string a(1, komorka[0] + i);
 			pomockomorki.push_back(a + komorka.substr(1, 1));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o dˆ³ugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka by³ˆa wpisana jako pierwsza
 		pomockomorki.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomockomorki.push_back(komorka);
 		komorkistatki.push_back(pomockomorki);
 
-		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naoko³ˆo statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa œ˜ciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa œ˜ciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= 1; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // Górna œ˜ciana
 						continue;
-					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 + i] = 5;
@@ -565,35 +565,35 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 		}
 	}
 
-	else if (wktorastrone == 3) // W d¢ˆ
+	else if (wktorastrone == 3) // W dó³
 	{
 		for (int i = 0; i < ilumasztowiec; i++) // Wpisanie statku
 		{
 			plansza[stoi(komorka.substr(1, 1)) + i][static_cast<int>(komorka[0]) - 97] = ilumasztowiec;
 			pomockomorki.push_back(komorka[0] + to_string(stoi(komorka.substr(1, 1)) + i));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o dˆ³ugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka by³ˆa wpisana jako pierwsza
 		pomockomorki.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomockomorki.push_back(komorka);
 		komorkistatki.push_back(pomockomorki);
 
-		for (int i = -1; i <= 1; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= 1; i++) // Wpisanie pól naoko³ˆo statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == 0 && i == -1) // Lewa œ˜ciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == 1) // Prawa ˜œciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= ilumasztowiec; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna œ˜ciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == 0 && j == -1) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == -1) // Górna œ˜ciana
 						continue;
-					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) + j][static_cast<int>(komorka[0]) - 97 + i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) + j][static_cast<int>(komorka[0]) - 97 + i] = 5;
@@ -611,28 +611,28 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 			string a(1, komorka[0] - i);
 			pomockomorki.push_back(a + komorka.substr(1, 1));
 		}
-		// Wstawienie do tabeli komorkistatki informacji o dˆugo˜ci masztowca, w kt¢r¥ stron© byˆ wpisany oraz o tym, kt¢ra kom¢rka byˆa wpisana jako pierwsza
+		// Wstawienie do tabeli komorkistatki informacji o dˆ³ugoœ˜ci masztowca, w któr¹ stronê by³ˆ wpisany oraz o tym, która komórka by³ˆa wpisana jako pierwsza
 		pomockomorki.push_back(to_string(ilumasztowiec) + to_string(wktorastrone));
 		pomockomorki.push_back(komorka);
 		komorkistatki.push_back(pomockomorki);
 
-		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie p¢l naokoˆo statku
+		for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naoko³ˆo statku
 		{
-			if (static_cast<int>(komorka[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa ˜ciana
+			if (static_cast<int>(komorka[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa œ˜ciana
 				continue;
-			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == -1) // Prawa ˜ciana
+			else if (static_cast<int>(komorka[0]) - 97 == 9 && i == -1) // Prawa ˜œciana
 				continue;
 			else
 			{
 				for (int j = -1; j <= 1; j++)
 				{
-					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+					if (stoi(komorka.substr(1, 1)) == 9 && j == -1) // Dolna œ˜ciana
 						continue;
-					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // G¢rna ˜ciana
+					else if (stoi(komorka.substr(1, 1)) == 0 && j == 1) // Górna œ˜ciana
 						continue;
-					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+					else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 						continue;
-					else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+					else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 					{
 						if (plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 - i] == 0)
 							plansza[stoi(komorka.substr(1, 1)) - j][static_cast<int>(komorka[0]) - 97 - i] = 5;
@@ -650,7 +650,7 @@ void wypisz_plansze(int plansza[10][10], int jak)
 
 	for (int i = 0; i < 11; i++)
 	{
-		for (int j = 0; j < 11; j++) // Wypisanie indeks¢w na g¢rze (a, b, c, ...)
+		for (int j = 0; j < 11; j++) // Wypisanie indeksów na górze (a, b, c, ...)
 		{
 			if (i == 0)
 			{
@@ -664,7 +664,7 @@ void wypisz_plansze(int plansza[10][10], int jak)
 
 			else
 			{
-				if (j == 0) // Wypisanie indeks¢w na prawej ˜cianie (1, 2, 3, ...)
+				if (j == 0) // Wypisanie indeksów na prawej ˜œcianie (1, 2, 3, ...)
 				{
 					if (i == 10)
 						cout << i << " ";
@@ -673,9 +673,9 @@ void wypisz_plansze(int plansza[10][10], int jak)
 				}
 				else // Wypisanie planszy
 				{
-					if (plansza[i - 1][j - 1] == 0) // Wypisanie element¢w pustych
+					if (plansza[i - 1][j - 1] == 0) // Wypisanie elementów pustych
 						cout << ". ";
-					else if (plansza[i - 1][j - 1] == 5 && jak == 1) // Wypisanie "obw¢dki" statku
+					else if (plansza[i - 1][j - 1] == 5 && jak == 1) // Wypisanie "obwódki" statku
 						cout << "x ";
 					else if (plansza[i - 1][j - 1] == 5 && jak == 0)
 						cout << ". ";
@@ -699,7 +699,7 @@ void wypisz_plansze_gra(int plansza[10][10])
 
 	for (int i = 0; i < 11; i++)
 	{
-		for (int j = 0; j < 11; j++) // Wypisanie indeks¢w na g¢rze (a, b, c, ...)
+		for (int j = 0; j < 11; j++) // Wypisanie indeksów na górze (a, b, c, ...)
 		{
 			if (i == 0)
 			{
@@ -713,7 +713,7 @@ void wypisz_plansze_gra(int plansza[10][10])
 
 			else
 			{
-				if (j == 0) // Wypisanie indeks¢w na prawej ˜cianie (1, 2, 3, ...)
+				if (j == 0) // Wypisanie indeksów na prawej œ˜cianie (1, 2, 3, ...)
 				{
 					if (i == 10)
 						cout << i << " ";
@@ -722,9 +722,9 @@ void wypisz_plansze_gra(int plansza[10][10])
 				}
 				else // Wypisanie planszy
 				{
-					if (plansza[i - 1][j - 1] == 0) // Wypisanie element¢w pustych
+					if (plansza[i - 1][j - 1] == 0) // Wypisanie elementów pustych
 						cout << ". ";
-					else if (plansza[i - 1][j - 1] == 5) // Wypisanie "obw¢dki" statku
+					else if (plansza[i - 1][j - 1] == 5) // Wypisanie "obwódki" statku
 						cout << "0 ";
 					else if (plansza[i - 1][j - 1] == 1) // Wypisanie statku
 					{
@@ -732,7 +732,7 @@ void wypisz_plansze_gra(int plansza[10][10])
 						cout << "x ";
 						SetConsoleTextAttribute(hConsole, 15); // Zmiana koloru czcionki na bia³y
 					}
-					else // Wypisanie nietrafionych p¢l
+					else // Wypisanie nietrafionych pól
 						cout << "0 ";
 				}
 			}
@@ -779,7 +779,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 	cout << "Kt¢re pole chcesz zaatakowa†? (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
 	cin >> komorka;
 
-	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana kom¢rka jest mo¾liwa do zaatakowania
+	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana komórka jest mo¿liwa do zaatakowania
 	{
 		sprawdzacz = 0;
 		sprawdzaczkomorka = 0;
@@ -788,7 +788,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 		if (komorka.length() < 2 || komorka.length() > 3)
 			komorka = "k5";
 
-		// Sprawdzanie, czy u¾ytkownik wpisaˆ mo¾liw¥ kom¢rk©
+		// Sprawdzanie, czy u¿ytkownik wpisa³ˆ mo¿liw¹ komórkê
 		for (int i = 0; i < 20; i++)
 		{
 			for (int j = 0; j < 20; j++)
@@ -813,7 +813,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 		else
 			komorka = komorka[0] + to_string(stoi(komorka.substr(1, 1)) - 1);
 
-		// Sprawdzanie, czy u¾ytkownik podaˆ kom¢rk©, kt¢rej nie wykorzystaˆ 
+		// Sprawdzanie, czy u¿ytkownik podaˆ komórkê, której nie wykorzysta³ˆ 
 		for (int i = 0; unsigned(i) < uzytekomorki.size(); i++)
 		{
 			if (komorka.compare(uzytekomorki[i]) == 0)
@@ -823,7 +823,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 			}
 		}
 
-		// Wypisanie bˆ©d¢w
+		// Wypisanie bˆ³êdów
 		if (sprawdzaczkomorka == 0)
 		{
 			cout << "Nie mo¾na zaatakowa† tego pola, gdy¾ podaˆe˜ niewˆa˜ciw¥ kom¢rk©! Spr¢buj ponownie: ";
@@ -846,7 +846,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 	}
 
 	int pomoci = 0, pomocj = 0;
-	for (int i = 0; unsigned(i) < komorkistatki.size(); i++) // Sprawdzenie, czy u¾ytkownik trafiˆ w statek przeciwnika
+	for (int i = 0; unsigned(i) < komorkistatki.size(); i++) // Sprawdzenie, czy u¿ytkownik trafiˆ³ w statek przeciwnika
 	{
 		for (int j = 0; unsigned(j) < komorkistatki[i].size(); j++)
 		{
@@ -863,7 +863,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 	int ilumasztowiec, wktorastrone;
 	string komorkapomoc;
 
-	if (sprawdzacztrafienie == 1) // Je˜li trafiˆ
+	if (sprawdzacztrafienie == 1) // Je˜œli trafi³ˆ
 	{
 		komorkistatki[pomoci].erase(komorkistatki[pomoci].begin() + pomocj);
 		plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97] = 1;
@@ -876,26 +876,26 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 			wktorastrone = stoi(komorkistatki[pomoci][0].substr(1));
 			komorkapomoc = komorkistatki[pomoci][1];
 
-			// Wypisanie p¢l naokoˆo statku
-			if (wktorastrone == 1) // W g¢r©
+			// Wypisanie pól naokoˆ³o statku
+			if (wktorastrone == 1) // W górê
 			{
-				for (int i = -1; i <= 1; i++) // Wpisanie p¢l naokoˆo statku
+				for (int i = -1; i <= 1; i++) // Wpisanie pól naoko³ˆo statku
 				{
-					if (static_cast<int>(komorkapomoc[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+					if (static_cast<int>(komorkapomoc[0]) - 97 == 0 && i == -1) // Lewa ˜œciana
 						continue;
-					else if (static_cast<int>(komorkapomoc[0]) - 97 == 9 && i == 1) // Prawa ˜ciana
+					else if (static_cast<int>(komorkapomoc[0]) - 97 == 9 && i == 1) // Prawa œ˜ciana
 						continue;
 					else
 					{
 						for (int j = -1; j <= ilumasztowiec; j++)
 						{
-							if (stoi(komorkapomoc.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+							if (stoi(komorkapomoc.substr(1, 1)) == 9 && j == -1) // Dolna œ˜ciana
 								continue;
-							else if (stoi(komorkapomoc.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // G¢rna ˜ciana
+							else if (stoi(komorkapomoc.substr(1, 1)) == ilumasztowiec - 1 && j == ilumasztowiec) // Górna œ˜ciana
 								continue;
-							else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+							else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 								continue;
-							else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+							else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 							{
 								if (plansza[stoi(komorkapomoc.substr(1, 1)) - j][static_cast<int>(komorkapomoc[0]) - 97 + i] == 0)
 								{
@@ -910,23 +910,23 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 			}
 			else if (wktorastrone == 2) // W prawo
 			{
-				for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie p¢l naokoˆo statku
+				for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naoko³ˆo statku
 				{
-					if (static_cast<int>(komorkapomoc[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+					if (static_cast<int>(komorkapomoc[0]) - 97 == 0 && i == -1) // Lewa ˜œciana
 						continue;
-					else if (static_cast<int>(komorkapomoc[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa ˜ciana
+					else if (static_cast<int>(komorkapomoc[0]) - 97 == 10 - ilumasztowiec && i == ilumasztowiec) // Prawa ˜œciana
 						continue;
 					else
 					{
 						for (int j = -1; j <= 1; j++)
 						{
-							if (stoi(komorkapomoc.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+							if (stoi(komorkapomoc.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 								continue;
-							else if (stoi(komorkapomoc.substr(1, 1)) == 0 && j == 1) // G¢rna ˜ciana
+							else if (stoi(komorkapomoc.substr(1, 1)) == 0 && j == 1) // Górna œ˜ciana
 								continue;
-							else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+							else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 								continue;
-							else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+							else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 							{
 								if (plansza[stoi(komorkapomoc.substr(1, 1)) - j][static_cast<int>(komorkapomoc[0]) - 97 + i] == 0)
 								{
@@ -940,25 +940,25 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 					}
 				}
 			}
-			else if (wktorastrone == 3) // W d¢ˆ
+			else if (wktorastrone == 3) // W dó³
 			{
-				for (int i = -1; i <= 1; i++) // Wpisanie p¢l naokoˆo statku
+				for (int i = -1; i <= 1; i++) // Wpisanie pól naokoˆ³o statku
 				{
-					if (static_cast<int>(komorkapomoc[0]) - 97 == 0 && i == -1) // Lewa ˜ciana
+					if (static_cast<int>(komorkapomoc[0]) - 97 == 0 && i == -1) // Lewa ˜œciana
 						continue;
-					else if (static_cast<int>(komorkapomoc[0]) - 97 == 9 && i == 1) // Prawa ˜ciana
+					else if (static_cast<int>(komorkapomoc[0]) - 97 == 9 && i == 1) // Prawa œ˜ciana
 						continue;
 					else
 					{
 						for (int j = -1; j <= ilumasztowiec; j++)
 						{
-							if (stoi(komorkapomoc.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna ˜ciana
+							if (stoi(komorkapomoc.substr(1, 1)) == 10 - ilumasztowiec && j == ilumasztowiec) // Dolna ˜œciana
 								continue;
-							else if (stoi(komorkapomoc.substr(1, 1)) == 0 && j == -1) // G¢rna ˜ciana
+							else if (stoi(komorkapomoc.substr(1, 1)) == 0 && j == -1) // Górna œ˜ciana
 								continue;
-							else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+							else if (i == 0 && j >= 0 && j <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 								continue;
-							else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+							else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 							{
 								if (plansza[stoi(komorkapomoc.substr(1, 1)) + j][static_cast<int>(komorkapomoc[0]) - 97 + i] == 0)
 								{
@@ -973,23 +973,23 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 			}
 			else if (wktorastrone == 4) // W lewo
 			{
-				for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie p¢l naokoˆo statku
+				for (int i = -1; i <= ilumasztowiec; i++) // Wpisanie pól naokoˆ³o statku
 				{
-					if (static_cast<int>(komorkapomoc[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa ˜ciana
+					if (static_cast<int>(komorkapomoc[0]) - 97 == ilumasztowiec - 1 && i == ilumasztowiec) // Lewa œ˜ciana
 						continue;
-					else if (static_cast<int>(komorkapomoc[0]) - 97 == 9 && i == -1) // Prawa ˜ciana
+					else if (static_cast<int>(komorkapomoc[0]) - 97 == 9 && i == -1) // Prawa ˜œciana
 						continue;
 					else
 					{
 						for (int j = -1; j <= 1; j++)
 						{
-							if (stoi(komorkapomoc.substr(1, 1)) == 9 && j == -1) // Dolna ˜ciana
+							if (stoi(komorkapomoc.substr(1, 1)) == 9 && j == -1) // Dolna ˜œciana
 								continue;
-							else if (stoi(komorkapomoc.substr(1, 1)) == 0 && j == 1) // G¢rna ˜ciana
+							else if (stoi(komorkapomoc.substr(1, 1)) == 0 && j == 1) // Górna œ˜ciana
 								continue;
-							else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Omini©cie kom¢rek ze statkiem
+							else if (j == 0 && i >= 0 && i <= ilumasztowiec - 1) // Ominiêcie komórek ze statkiem
 								continue;
-							else // Wypisanie p¢l niemo¾liwych do zaj©cia przez inne statki
+							else // Wypisanie pól niemo¿liwych do zajêcia przez inne statki
 							{
 								if (plansza[stoi(komorkapomoc.substr(1, 1)) - j][static_cast<int>(komorkapomoc[0]) - 97 - i] == 0)
 								{
@@ -1003,9 +1003,9 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 				}
 			}
 
-			komorkistatki.erase(komorkistatki.begin() + pomoci); // Usuni©cie kom¢rki z zatopionym statkiem
+			komorkistatki.erase(komorkistatki.begin() + pomoci); // Usuniêcie komórki z zatopionym statkiem
 
-			if (komorkistatki.size() == 0) // Skoäczenie dziaˆania funkcji po zwyci©stwie
+			if (komorkistatki.size() == 0) // Skoñczenie dzia³ˆania funkcji po zwyciêstwie
 				return;
 		}
 		else
@@ -1015,7 +1015,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 		cout << "Kolej gracza nr " << gracz << endl;
 		gra(plansza, komorki, uzytekomorki, komorkistatki, gracz);
 	}
-	else // Je˜li nie trafiˆ
+	else // Jeœ˜li nie trafiˆ³
 	{
 		plansza[stoi(komorka.substr(1, 1))][static_cast<int>(komorka[0]) - 97] = 2;
 		wypisz_plansze_gra(plansza);
@@ -1138,7 +1138,7 @@ int main()
 	string komorki[20][20];
 	int wygrana = 1;
 
-	// Wypeˆnienie tabel zerami
+	// Wype³nienie tabel zerami
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
@@ -1150,7 +1150,7 @@ int main()
 		}
 	}
 
-	// Wypeˆnienie tabeli mo¿liwymi komórkami do wykorzystania
+	// Wypeˆ³nienie tabeli mo¿liwymi komórkami do wykorzystania
 	for (int i = 1; i <= 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
