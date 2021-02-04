@@ -42,7 +42,7 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 	}
 
 	// Ustawianie pierwszej kom¢rki masztowca
-	cout << "Podaj kom¢rk©, w kt¢rej chcesz umie˜ci† pierwsz¥ cz©˜† " << ilumasztowiec << "masztowca (Podaj maˆ¥ liter©, a nast©pnie liczb©, np. d6): ";
+	cout << "Podaj kom¢rk©, w kt¢rej chcesz umie˜ci† pierwsz¥ cz©˜† " << ilumasztowiec << "masztowca (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
 	cin >> komorka;
 
 	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana kom¢rka jest mo¾liwa
@@ -648,6 +648,7 @@ void ustaw_statki_losowo(int plansza[10][10], vector<vector<string>>& komorkista
 void wypisz_plansze(int plansza[10][10], int jak)
 {
 	system("cls"); // Wyczyszczenie konsoli
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // Zmienna do ustawiania kolorów
 
 	for (int i = 0; i < 11; i++)
 	{
@@ -681,7 +682,11 @@ void wypisz_plansze(int plansza[10][10], int jak)
 					else if (plansza[i - 1][j - 1] == 5 && jak == 0)
 						cout << ". ";
 					else // Wypisanie statku
+					{
+						SetConsoleTextAttribute(hConsole, 3); // Zmiana koloru czcionki na jasnoniebieski
 						cout << plansza[i - 1][j - 1] << " ";
+						SetConsoleTextAttribute(hConsole, 15); // Zmiana koloru czcionki na bia³y
+					}
 				}
 			}
 		}
@@ -692,6 +697,7 @@ void wypisz_plansze(int plansza[10][10], int jak)
 void wypisz_plansze_gra(int plansza[10][10])
 {
 	system("cls"); // Wyczyszczenie konsoli
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // Zmienna do ustawiania kolorów
 
 	for (int i = 0; i < 11; i++)
 	{
@@ -723,7 +729,11 @@ void wypisz_plansze_gra(int plansza[10][10])
 					else if (plansza[i - 1][j - 1] == 5) // Wypisanie "obw¢dki" statku
 						cout << "0 ";
 					else if (plansza[i - 1][j - 1] == 1) // Wypisanie statku
+					{
+						SetConsoleTextAttribute(hConsole, 3); // Zmiana koloru czcionki na jasnoniebieski
 						cout << "x ";
+						SetConsoleTextAttribute(hConsole, 15); // Zmiana koloru czcionki na bia³y
+					}
 					else // Wypisanie nietrafionych p¢l
 						cout << "0 ";
 				}
@@ -739,7 +749,7 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 	bool sprawdzacz = 0, sprawdzaczkomorka = 0, sprawdzaczuzycie = 1, sprawdzacztrafienie = 0;
 
 	// Ustawianie atakowanego pola
-	cout << "Kt¢re pole chcesz zaatakowa†? (Podaj maˆ¥ liter©, a nast©pnie liczb©, np. d6): ";
+	cout << "Kt¢re pole chcesz zaatakowa†? (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
 	cin >> komorka;
 
 	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana kom¢rka jest mo¾liwa do zaatakowania
@@ -990,7 +1000,9 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 void menu(int plansza[10][10], string komorki[20][20], vector<vector<string>>& komorkistatki, int gracz)
 {
 	system("cls");
-	cout << "STATKI!" << endl;
+	cout << "0xxxx0...0xxx0....0xx0.....0x0" << endl;
+	cout << "            STATKI!" << endl;
+	cout << "0xxxx0...0xxx0....0xx0.....0x0" << endl;
 	cout << "Witaj graczu nr " << gracz << endl;
 	cout << "Wybierz opcj©." << endl;
 	cout << "1. Graj" << endl;
@@ -1075,7 +1087,7 @@ void menu(int plansza[10][10], string komorki[20][20], vector<vector<string>>& k
 			system("cls");
 			cout << "Aby ustawi† statek, musisz wybra† jego kierunek i pierwsz¥ kom¢rk©" << endl;
 			cout << "Aby wybra† kierunek wpisujemy cyfr© do niego przypisan¥ i zatwierdzamy wyb¢r enterem (1 - g¢ra, 2 - prawo, 3 - d¢ˆ, 4 - lewo)." << endl;
-			cout << "Aby wybra† pierwsz¥ kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 i zatwierdzamy wyb¢r enterem. Przykˆad: d7" << endl;
+			cout << "Aby wybra† pierwsz¥ kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 lub na odwr¢t i zatwierdzamy wyb¢r enterem. Przykˆad: d7 lub 7d" << endl;
 			cout << "Dla przykˆadu, gdy wybierzemy kierunek w g¢r© i pierwsz¥ kom¢rk© a4 dla czteromasztowca, statek zostanie wpisany w kom¢rki a4, a3, a2 i a1." << endl;
 			cout << "Aby zaatakowa† kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 i zatwierdzamy wyb¢r enterem. Przykˆad: d7" << endl;
 			cout << "Pierwsza osoba, kt¢ra wyeliminuje wszystkie statki przeciwnika wygrywa! Miˆej gry!" << endl;
