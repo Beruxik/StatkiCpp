@@ -1112,11 +1112,11 @@ void menu(int plansza[10][10], string komorki[20][20], vector<vector<string>>& k
 		case 2:
 		{
 			system("cls");
-			cout << "Aby ustawi† statek, musisz wybra† jego kierunek i pierwsz¥ kom¢rk©" << endl;
+			cout << "Aby ustawi† statek, musisz wybra† jego kierunek i pierwsz¥ kom¢rk©." << endl;
 			cout << "Aby wybra† kierunek wpisujemy cyfr© do niego przypisan¥ i zatwierdzamy wyb¢r enterem (1 - g¢ra, 2 - prawo, 3 - d¢ˆ, 4 - lewo)." << endl;
-			cout << "Aby wybra† pierwsz¥ kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 lub na odwr¢t i zatwierdzamy wyb¢r enterem. Przykˆad: d7 lub 7d" << endl;
+			cout << "Aby wybra† pierwsz¥ kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 lub na odwr¢t i zatwierdzamy wyb¢r enterem. Przykˆad: d7 lub 7d." << endl;
 			cout << "Dla przykˆadu, gdy wybierzemy kierunek w g¢r© i pierwsz¥ kom¢rk© a4 dla czteromasztowca, statek zostanie wpisany w kom¢rki a4, a3, a2 i a1." << endl;
-			cout << "Aby zaatakowa† kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 i zatwierdzamy wyb¢r enterem. Przykˆad: d7" << endl;
+			cout << "Aby zaatakowa† kom¢rk©, wpisujemy jej indeks, zaczynaj¥c od maˆej litery od a do j, a nast©pnie liczb© od 1 do 10 lub na odwr¢t i zatwierdzamy wyb¢r enterem. Przykˆad: d7 lub 7d." << endl;
 			cout << "Pierwsza osoba, kt¢ra wyeliminuje wszystkie statki przeciwnika wygrywa! Miˆej gry!" << endl;
 			cout << endl << endl << "Autor: Jakub Rejdych" << endl;
 			system("pause");
