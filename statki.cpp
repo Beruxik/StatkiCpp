@@ -40,7 +40,10 @@ void ustaw_statki(int plansza[10][10], string komorki[20][20], vector<vector<str
 	}
 
 	// Ustawianie pierwszej komórki masztowca
-	cout << "Podaj kom¢rk©, w kt¢rej chcesz umie˜ci† pierwsz¥ cz©˜† " << ilumasztowiec << "masztowca (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
+	if (ilumasztowiec == 1)
+		cout << "Podaj kom¢rk©, w kt¢rej chcesz umie˜ci† " << ilumasztowiec << "masztowiec: ";
+	else
+		cout << "Podaj kom¢rk©, w kt¢rej chcesz umie˜ci† pierwsz¥ cz©˜† " << ilumasztowiec << "masztowca (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
 	cin >> komorka;
 
 	while (sprawdzacz != 1) // Sprawdzanie, czy wpisana komórka jest mo¿liwa
@@ -768,12 +771,18 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 
 	if (jednomasztowiec != 0)
 		cout << "Jednomasztowce: " << jednomasztowiec << endl;
+	else if (jednomasztowiec == 1)
+		cout << "Jednomasztowiec: " << jednomasztowiec << endl;
 	if (dwumasztowiec != 0)
 		cout << "Dwumasztowce: " << dwumasztowiec << endl;
+	else if (dwumasztowiec == 1)
+		cout << "Dwumasztowiec: " << dwumasztowiec << endl;
 	if (trojmasztowiec != 0)
 		cout << "Tr¢jmasztowce: " << trojmasztowiec << endl;
-	if (czteromasztowiec != 0)
-		cout << "Czteromasztowce: " << czteromasztowiec << endl;
+	else if (trojmasztowiec == 1)
+		cout << "Tr¢jmasztowiec: " << trojmasztowiec << endl;
+	if (czteromasztowiec == 1)
+		cout << "Czteromasztowiec: " << czteromasztowiec << endl;
 
 	// Ustawianie atakowanego pola
 	cout << "Kt¢re pole chcesz zaatakowa†? (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
