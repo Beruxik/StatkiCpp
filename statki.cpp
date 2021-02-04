@@ -1,10 +1,8 @@
 #include<iostream>
 #include<string>
-#include<limits>
 #include<random>
 #include<vector>
 #include<windows.h>
-#include<cstdlib>
 
 using namespace std;
 
@@ -747,6 +745,35 @@ void gra(int plansza[10][10], string komorki[20][20], vector<string>& uzytekomor
 {
 	string komorka;
 	bool sprawdzacz = 0, sprawdzaczkomorka = 0, sprawdzaczuzycie = 1, sprawdzacztrafienie = 0;
+	int jednomasztowiec = 0, dwumasztowiec = 0, trojmasztowiec = 0, czteromasztowiec = 0;
+
+	jednomasztowiec = 0;
+	dwumasztowiec = 0;
+	trojmasztowiec = 0;
+	czteromasztowiec = 0;
+
+	// Wypisywanie ile statków zosta³o do zatopienia
+	cout << "Do zatopienia zostaˆo: " << endl;
+	for (int i = 0; unsigned(i) < komorkistatki.size(); i++)
+	{
+		if (komorkistatki[i][komorkistatki[i].size() - 2][0] == '1')
+			jednomasztowiec++;
+		if (komorkistatki[i][komorkistatki[i].size() - 2][0] == '2')
+			dwumasztowiec++;
+		if (komorkistatki[i][komorkistatki[i].size() - 2][0] == '3')
+			trojmasztowiec++;
+		if (komorkistatki[i][komorkistatki[i].size() - 2][0] == '4')
+			czteromasztowiec++;
+	}
+
+	if (jednomasztowiec != 0)
+		cout << "Jednomasztowce: " << jednomasztowiec << endl;
+	if (dwumasztowiec != 0)
+		cout << "Dwumasztowce: " << dwumasztowiec << endl;
+	if (trojmasztowiec != 0)
+		cout << "Tr¢jmasztowce: " << trojmasztowiec << endl;
+	if (czteromasztowiec != 0)
+		cout << "Czteromasztowce: " << czteromasztowiec << endl;
 
 	// Ustawianie atakowanego pola
 	cout << "Kt¢re pole chcesz zaatakowa†? (Podaj maˆ¥ liter©, a nast©pnie liczb© lub na odwr¢t, np. d6 lub 6d): ";
